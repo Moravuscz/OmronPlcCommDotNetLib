@@ -50,7 +50,7 @@ namespace Moravuscz.OmronPLCComm
         public static implicit operator int(Port port) => port._portNum;
 
         /// <summary>
-        /// Instantiate <see cref="Port"/> with <see cref="int"/> as parameter for its value
+        /// Define <see cref="Port"/> with <see cref="int"/> as parameter for its value
         /// </summary>
         /// <param name="portNumber"></param>
         public static implicit operator Port(int portNumber) => new Port(portNumber);

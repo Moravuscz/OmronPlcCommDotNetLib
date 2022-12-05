@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Moravuscz.OmronPLCComm
 {
-    internal interface ITransport
+    /// <summary>
+    /// Provides network communication methods and status
+    /// </summary>
+    public interface ITransport
     {
         #region Properties
 
@@ -11,6 +15,11 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         bool Connected { get; }
 
+        /// <summary>
+        /// Last error occured during communication
+        /// </summary>
+        string LastError { get; }
+
         #endregion Properties
 
         #region Methods
@@ -18,7 +27,7 @@ namespace Moravuscz.OmronPLCComm
         /// <summary>
         /// Closes connection to PLC
         /// </summary>
-        void CloseConnection();
+        bool CloseConnection();
 
         /// <summary>
         /// Opens connection to PLC
@@ -30,13 +39,13 @@ namespace Moravuscz.OmronPLCComm
         /// Receive response data from PLC
         /// </summary>
         /// <returns>number of <see cref="byte"/>s received</returns>
-        int ReceiveData();
+        int ReceiveData(byte[] receiveDataBuffer);
 
         /// <summary>
         /// Send command data to PLC
         /// </summary>
         /// <returns>Number of <see cref="byte"/>s sent</returns>
-        int SendData();
+        int SendData(byte[] sendDataBuffer);
 
         #endregion Methods
     }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Moravuscz.OmronPLCComm.Serial
+namespace Moravuscz.OmronPLCComm.Ethernet
 {
-    public class HostLink : ITransport, IPlcDataTransfer
+    public class FinsUdp : ITransport, IPlcDataTransfer
     {
         #region Properties
 
