@@ -1,0 +1,191 @@
+﻿<Window
+    x:Class="CommunicationsExample.Views.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModels="clr-namespace:CommunicationsExample.ViewModels"
+    xmlns:local="clr-namespace:CommunicationsExample"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    d:DataContext="{d:DesignInstance Type=ViewModels:MainWindowViewModel}"
+    mc:Ignorable="d">
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <GroupBox
+            Grid.Column="1"
+            Margin="5,10,10,5"
+            Padding="5"
+            Header="Communication Tests">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,5,5"
+                    Content="FINS/TCP Read" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="5,0,5,5"
+                    Content="FINS/UDP Read" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="5,0,5,5"
+                    Content="Ethernet/IP Read" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Margin="5,0,0,5"
+                    Content="Serial Read" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="0,5,5,0"
+                    Content="FINS/TCP Write" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5,5,5,0"
+                    Content="FINS/UDP Write" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="5,5,5,0"
+                    Content="Ethernet/IP Write" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="3"
+                    Margin="5,5,0,0"
+                    Content="Serial Write" />
+            </Grid>
+        </GroupBox>
+        <GroupBox
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            MinWidth="320"
+            Margin="10,10,0,10"
+            Padding="5"
+            Header="PLC Settings">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Margin="0,5,5,5"
+                    Content="PLC Type" />
+                <ComboBox
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="1"
+                    Margin="0,5,5,5"
+                    Content="Memory Type" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="2"
+                    Margin="0,5,5,5"
+                    Content="Word Address" />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="3"
+                    Margin="0,5,5,5"
+                    Content="Bit Address" />
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="4"
+                    Margin="0,5,5,5"
+                    Content="IP Address" />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="5"
+                    Margin="0,5,5,5"
+                    Content="FINS IP Port" />
+                <TextBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="6"
+                    Margin="0,5,5,5"
+                    Content="Serial COM Port" />
+                <ComboBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Label
+                    Grid.Row="7"
+                    Margin="0,5,5,5"
+                    Content="Write Data" />
+                <TextBox
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Margin="5,5,0,5" />
+                <Button
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,5,0,0"
+                    Content="Save Settings" />
+            </Grid>
+        </GroupBox>
+        <GroupBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5,5,10,10"
+            Padding="5"
+            Header="Results">
+            <Border
+                BorderBrush="Gray"
+                BorderThickness="1">
+                <TextBlock />
+            </Border>
+        </GroupBox>
+    </Grid>
+</Window>
