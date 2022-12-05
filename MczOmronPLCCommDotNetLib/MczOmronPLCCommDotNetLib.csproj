@@ -14,15 +14,8 @@
     <RepositoryUrl>https://github.com/Moravuscz/OmronPLCCommDotNetLib</RepositoryUrl>
     <ApplicationIcon />
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseExpression></PackageLicenseExpression>
-    <PackageLicenseFile>README.md</PackageLicenseFile>
+    <PackageLicenseExpression>Unlicense</PackageLicenseExpression>
+    <PackageLicenseFile></PackageLicenseFile>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
 
 </Project>
