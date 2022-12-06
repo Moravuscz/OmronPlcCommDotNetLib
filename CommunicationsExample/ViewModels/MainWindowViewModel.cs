@@ -1,6 +1,7 @@
 ﻿using System;
 using CommunicationsExample.Commands;
 using Moravuscz.OmronPLCComm;
+using Moravuscz.OmronPLCComm.Ethernet;
 
 namespace CommunicationsExample.ViewModels
 {
@@ -10,7 +11,10 @@ namespace CommunicationsExample.ViewModels
 
         private string _bitAddress = "0.00";
         private string _finsPort = new Port(9600).ToString();
+        private FinsTcp _finsTcp;
+        private bool _finsTcpConnected;
         private string _ipAddress = "192.168.250.1";
+        private string _resultText = "";
         private string _wordAddress = "100";
         private string _writeData = "0000";
 
@@ -21,17 +25,17 @@ namespace CommunicationsExample.ViewModels
         public MainWindowViewModel()
         {
             SaveSetupCommand = new DelegateCommand(SaveSetup);
-            FinsTCPReadCommand = new DelegateCommand(FinsTcpRead);
+            FinsTcpReadCommand = new DelegateCommand(FinsTcpRead);
             FinsUdpReadCommand = new DelegateCommand(FinsUdpRead);
             FinsTcpWriteCommand = new DelegateCommand(FinsTcpWrite);
             FinsUdpWriteCommand = new DelegateCommand(FinsUdpWrite);
-            EthernetIPReadCommand = new DelegateCommand(EthernetIPRead);
-            EthernetIPWriteCommand = new DelegateCommand(EthernetIPWrite);
+            EthernetIPReadCommand = new DelegateCommand(EthernetIpRead);
+            EthernetIPWriteCommand = new DelegateCommand(EthernetIpWrite);
+            FinsTcpConnectCommand = new DelegateCommand(FinsTcpConnect);
+            FinsTcpDisconnectCommand = new DelegateCommand(FinsTcpDisconnect);
         }
 
         #endregion Public Constructors + Destructors
-
-
 
         #region Public Properties
 
@@ -46,7 +50,6 @@ namespace CommunicationsExample.ViewModels
         }
 
         public CommandBase EthernetIPReadCommand { get; }
-
         public CommandBase EthernetIPWriteCommand { get; }
 
         public string FinsPort
@@ -59,8 +62,20 @@ namespace CommunicationsExample.ViewModels
             }
         }
 
-        public CommandBase FinsTCPReadCommand { get; }
+        public CommandBase FinsTcpConnectCommand { get; }
 
+        public bool FinsTcpConnected
+        {
+            get => _finsTcpConnected;
+            private set
+            {
+                _finsTcpConnected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public CommandBase FinsTcpDisconnectCommand { get; }
+        public CommandBase FinsTcpReadCommand { get; }
         public CommandBase FinsTcpWriteCommand { get; }
 
         public CommandBase FinsUdpReadCommand { get; }
@@ -73,6 +88,16 @@ namespace CommunicationsExample.ViewModels
             set
             {
                 _ipAddress = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string ResultText
+        {
+            get => _resultText;
+            set
+            {
+                _resultText = value;
                 RaisePropertyChanged();
             }
         }
@@ -101,15 +126,29 @@ namespace CommunicationsExample.ViewModels
 
         #endregion Public Properties
 
-
-
         #region Private Methods
 
-        private void EthernetIPRead(object commandParameter) => throw new NotImplementedException();
+        private void EthernetIpRead(object commandParameter) => throw new NotImplementedException();
 
-        private void EthernetIPWrite(object commandParameter) => throw new NotImplementedException();
+        private void EthernetIpWrite(object commandParameter) => throw new NotImplementedException();
 
-        private void FinsTcpRead(object commandParameter) => throw new NotImplementedException();
+        private void FinsTcpConnect(object commandParameter)
+        {
+            FinsTcpConnected = _finsTcp.OpenConnection();
+        }
+
+        private void FinsTcpDisconnect(object commandParameter)
+        {
+            FinsTcpConnected = _finsTcp.CloseConnection();
+        }
+
+        private void FinsTcpRead(object commandParameter)
+        {
+            if (FinsTcpConnected)
+            {
+                ResultText += _finsTcp.PlcReadWord(WriteData) + Environment.NewLine;
+            }
+        }
 
         private void FinsTcpWrite(object commandParameter) => throw new NotImplementedException();
 
@@ -119,12 +158,28 @@ namespace CommunicationsExample.ViewModels
 
         private void SaveSetup(object commandParameter)
         {
-            /*
-             * Fins.Config config = new Fins.Config()
-            {
-                DestinationAddress = new Fins.DestinationAddress();
-            }
-            */
+            _finsTcp = new FinsTcp
+            (
+                config: new Fins.Config
+                (
+                    sourceAddress: new Fins.SourceAddress
+                    (
+                        sourceNet: new Fins.Net(2)
+                    ),
+                    destinationAddress: new Fins.DestinationAddress
+                    (
+                        destinationNet: new Fins.Net(95),
+                        destinationNode: new Fins.Node(80)
+                    ),
+                    frameLength: new Fins.FrameLength
+                    (
+                        frameLength: Fins.FrameLength.Default
+                    ),
+                    responseTimeout: new Fins.ResponseTimeout(2)
+                ),
+                iPAddress: System.Net.IPAddress.Parse(IPAddress),
+                port: new Port(int.Parse(FinsPort))
+            );
         }
 
         #endregion Private Methods

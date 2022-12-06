@@ -4,10 +4,6 @@ namespace Moravuscz.OmronPLCComm
 {
     public class Fins
     {
-        #region Structs
-
-
-
         #region Public Structs
 
         /// <summary>
@@ -26,8 +22,6 @@ namespace Moravuscz.OmronPLCComm
             }
 
             #endregion Public Constructors + Destructors
-
-
 
             #region Public Properties
 
@@ -50,19 +44,16 @@ namespace Moravuscz.OmronPLCComm
 
             #endregion Public Fields
 
-
-
             #region Public Constructors + Destructors
 
-            public DestinationAddress(Net sourceNet, Node sourceNode)
+            public DestinationAddress(Net destinationNet, Node destinationNode
+                )
             {
-                Net = sourceNet;
-                Node = sourceNode;
+                Net = destinationNet;
+                Node = destinationNode;
             }
 
             #endregion Public Constructors + Destructors
-
-
 
             #region Public Properties
 
@@ -84,7 +75,19 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct FrameLength
         {
+            #region Private Fields
+
+            private readonly int _frameLength;
+
+            #endregion Private Fields
+
             #region Public Fields
+
+            /// <summary>
+            /// Default value (<inheritdoc cref="Default" path="//example"/>)
+            /// </summary>
+            /// <example>2000</example>
+            public const int Default = 2000;
 
             /// <summary>
             /// Maximum permissible value
@@ -102,14 +105,6 @@ namespace Moravuscz.OmronPLCComm
 
             #endregion Public Fields
 
-
-
-            #region Private Fields
-
-            private readonly int _frameLength;
-
-            #endregion Private Fields
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -126,6 +121,12 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct Net
         {
+            #region Private Fields
+
+            private readonly int _netNum;
+
+            #endregion Private Fields
+
             #region Public Fields
 
             /// <summary>
@@ -144,14 +145,6 @@ namespace Moravuscz.OmronPLCComm
 
             #endregion Public Fields
 
-
-
-            #region Private Fields
-
-            private readonly int _netNum;
-
-            #endregion Private Fields
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -165,8 +158,6 @@ namespace Moravuscz.OmronPLCComm
             }
 
             #endregion Public Constructors + Destructors
-
-
 
             #region Public Methods
 
@@ -182,20 +173,18 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct Node
         {
+            #region Private Fields
+
+            private readonly int _nodeNum;
+
+            #endregion Private Fields
+
             #region Public Fields
 
             public const int MaxValue = 255;
             public const int MinValue = 0;
 
             #endregion Public Fields
-
-
-
-            #region Private Fields
-
-            private readonly int _nodeNum;
-
-            #endregion Private Fields
 
             #region Public Constructors + Destructors
 
@@ -206,8 +195,6 @@ namespace Moravuscz.OmronPLCComm
             }
 
             #endregion Public Constructors + Destructors
-
-
 
             #region Public Methods
 
@@ -223,6 +210,12 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct ResponseTimeout
         {
+            #region Private Fields
+
+            private readonly int _time;
+
+            #endregion Private Fields
+
             #region Public Fields
 
             /// <summary>
@@ -240,14 +233,6 @@ namespace Moravuscz.OmronPLCComm
             public const int MinValue = 0;
 
             #endregion Public Fields
-
-
-
-            #region Private Fields
-
-            private readonly int _time;
-
-            #endregion Private Fields
 
             #region Public Constructors + Destructors
 
@@ -280,8 +265,6 @@ namespace Moravuscz.OmronPLCComm
 
             #endregion Public Fields
 
-
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -291,8 +274,6 @@ namespace Moravuscz.OmronPLCComm
             public SourceAddress(Net sourceNet) => Net = sourceNet;
 
             #endregion Public Constructors + Destructors
-
-
 
             #region Public Properties
 
