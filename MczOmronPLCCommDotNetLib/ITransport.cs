@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Moravuscz.OmronPLCComm
+﻿namespace Moravuscz.OmronPLCComm
 {
     /// <summary>
     /// Provides network communication methods and status
     /// </summary>
     public interface ITransport
     {
-        #region Properties
+        #region Public Properties
 
         /// <summary>
         /// Connection status
@@ -20,9 +17,11 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         string LastError { get; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
+
+
+        #region Public Methods
 
         /// <summary>
         /// Closes connection to PLC
@@ -47,6 +46,6 @@ namespace Moravuscz.OmronPLCComm
         /// <returns>Number of <see cref="byte"/>s sent</returns>
         int SendData(byte[] sendDataBuffer);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

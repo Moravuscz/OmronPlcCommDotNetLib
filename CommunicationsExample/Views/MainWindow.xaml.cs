@@ -7,10 +7,10 @@ namespace CommunicationsExample.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        #region Constructors
+        #region Public Constructors + Destructors
 
         public MainWindow() => InitializeComponent();
 
-        #endregion Constructors
+        #endregion Public Constructors + Destructors
     }
 }

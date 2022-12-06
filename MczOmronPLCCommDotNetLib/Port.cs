@@ -7,7 +7,7 @@ namespace Moravuscz.OmronPLCComm
     /// </summary>
     public struct Port
     {
-        #region Fields
+        #region Public Fields
 
         /// <summary>
         /// Maximum permissible value
@@ -23,25 +23,33 @@ namespace Moravuscz.OmronPLCComm
         /// <remarks>Inclusive</remarks>
         public const int MinValue = 0;
 
+        #endregion Public Fields
+
+
+
+        #region Private Fields
+
         private readonly int _portNum;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Constructors
+        #region Public Constructors + Destructors
 
         /// <summary>
         /// Network Port
         /// </summary>
         /// <param name="portNumber">Any <see cref="int"/> from <see cref="MinValue"><inheritdoc cref="MinValue"  path="//example"/></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue"  path="//example"/></see>.</param>
-        private Port(int portNumber)
+        public Port(int portNumber)
         {
             if (portNumber > MaxValue || portNumber < MinValue) { throw new ArgumentOutOfRangeException(); }
             _portNum = portNumber;
         }
 
-        #endregion Constructors
+        #endregion Public Constructors + Destructors
 
-        #region Methods
+
+
+        #region Public Methods
 
         /// <summary>
         /// Allow <see cref="Port"/> to be used same as <see cref="int"/>
@@ -55,6 +63,8 @@ namespace Moravuscz.OmronPLCComm
         /// <param name="portNumber"></param>
         public static implicit operator Port(int portNumber) => new Port(portNumber);
 
-        #endregion Methods
+        public override string ToString() => _portNum.ToString();
+
+        #endregion Public Methods
     }
 }

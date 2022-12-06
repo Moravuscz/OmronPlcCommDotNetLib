@@ -6,14 +6,27 @@ namespace Moravuscz.OmronPLCComm.Ethernet
 {
     public class FinsTcp : ITransport, IPlcDataTransfer
     {
-        #region Fields
+        #region Private Fields
 
         private readonly Socket _socket = null;
         private string _lastError;
 
-        #endregion Fields
+        #endregion Private Fields
 
-        #region Properties
+        #region Public Constructors + Destructors
+
+        public FinsTcp(Fins.Config config, IPAddress iPAddress, Port port)
+        {
+            Config = config;
+            ConnectionIP = iPAddress;
+            Port = port;
+        }
+
+        #endregion Public Constructors + Destructors
+
+
+
+        #region Public Properties
 
         public Fins.Config Config { get; private set; }
         public bool Connected => _socket.Connected;
@@ -27,11 +40,11 @@ namespace Moravuscz.OmronPLCComm.Ethernet
 
         public Port Port { get; private set; }
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region Methods
 
-        #region ITransport Implementation
+
+        #region Public Methods
 
         public bool CloseConnection()
         {
@@ -45,20 +58,6 @@ namespace Moravuscz.OmronPLCComm.Ethernet
             return Connected;
         }
 
-        public int ReceiveData(byte[] receiveDataBuffer)
-        {
-            return _socket.Receive(receiveDataBuffer);
-        }
-
-        public int SendData(byte[] sendDataBuffer)
-        {
-            return _socket.Send(sendDataBuffer);
-        }
-
-        #endregion ITransport Implementation
-
-        #region IPlcDataTransfer
-
         public bool PlcReadBit(string address) => throw new NotImplementedException();
 
         public short PlcReadWord(string word) => throw new NotImplementedException();
@@ -71,15 +70,16 @@ namespace Moravuscz.OmronPLCComm.Ethernet
 
         public bool PlcWriteWord(string startAddress, short[] values) => throw new NotImplementedException();
 
-        #endregion IPlcDataTransfer
-
-        public FinsTcp(Fins.Config config, IPAddress iPAddress, Port port)
+        public int ReceiveData(byte[] receiveDataBuffer)
         {
-            Config = config;
-            ConnectionIP = iPAddress;
-            Port = port;
+            return _socket.Receive(receiveDataBuffer);
         }
 
-        #endregion Methods
+        public int SendData(byte[] sendDataBuffer)
+        {
+            return _socket.Send(sendDataBuffer);
+        }
+
+        #endregion Public Methods
     }
 }

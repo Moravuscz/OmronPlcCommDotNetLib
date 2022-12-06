@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System;
-
-namespace Moravuscz.OmronPLCComm
+﻿namespace Moravuscz.OmronPLCComm
 {
     public interface IPlcDataTransfer
     {
-        #region Methods
+        #region Public Methods
 
         /// <summary>
         ///
@@ -52,6 +49,6 @@ namespace Moravuscz.OmronPLCComm
         /// <returns></returns>
         bool PlcWriteWord(string startAddress, short[] values);
 
-        #endregion Methods
+        #endregion Public Methods
     }
 }

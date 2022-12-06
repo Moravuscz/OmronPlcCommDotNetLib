@@ -6,19 +6,37 @@ namespace Moravuscz.OmronPLCComm
     {
         #region Structs
 
+
+
+        #region Public Structs
+
         /// <summary>
         /// Encapsulates FINS Communication Settings
         /// </summary>
         public struct Config
         {
-            #region Properties
+            #region Public Constructors + Destructors
 
-            public DestinationAddress DestinationAddress { get; }
-            public FrameLength FrameLength { get; }
-            public ReponseTimeout ReponseTimeout { get; }
-            public SourceAddress SourceAddress { get; }
+            public Config(SourceAddress sourceAddress, DestinationAddress destinationAddress, FrameLength frameLength, ResponseTimeout responseTimeout)
+            {
+                DestinationAddress = destinationAddress;
+                SourceAddress = sourceAddress;
+                FrameLength = frameLength;
+                ResponseTimeout = responseTimeout;
+            }
 
-            #endregion Properties
+            #endregion Public Constructors + Destructors
+
+
+
+            #region Public Properties
+
+            public DestinationAddress DestinationAddress { get; set; }
+            public FrameLength FrameLength { get; set; }
+            public ResponseTimeout ResponseTimeout { get; set; }
+            public SourceAddress SourceAddress { get; set; }
+
+            #endregion Public Properties
         }
 
         /// <summary>
@@ -26,34 +44,39 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct DestinationAddress
         {
-            #region Fields
+            #region Public Fields
 
-            /// <summary>
-            ///
-            /// </summary>
             public const int Unit = 0;
 
-            /// <summary>
-            ///
-            /// </summary>
-            public Net Net;
+            #endregion Public Fields
 
-            /// <summary>
-            ///
-            /// </summary>
-            public Node Node;
 
-            #endregion Fields
 
-            #region Constructors
+            #region Public Constructors + Destructors
 
-            private DestinationAddress(Net sourceNet, Node sourceNode)
+            public DestinationAddress(Net sourceNet, Node sourceNode)
             {
                 Net = sourceNet;
                 Node = sourceNode;
             }
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
+
+
+
+            #region Public Properties
+
+            /// <summary>
+            ///
+            /// </summary>
+            public Net Net { get; set; }
+
+            /// <summary>
+            ///
+            /// </summary>
+            public Node Node { get; set; }
+
+            #endregion Public Properties
         }
 
         /// <summary>
@@ -61,7 +84,7 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct FrameLength
         {
-            #region Fields
+            #region Public Fields
 
             /// <summary>
             /// Maximum permissible value
@@ -77,19 +100,25 @@ namespace Moravuscz.OmronPLCComm
             /// <remarks>Inclusive</remarks>
             public const int MinValue = 0;
 
-            public readonly int _frameLength;
+            #endregion Public Fields
 
-            #endregion Fields
 
-            #region Constructors
+
+            #region Private Fields
+
+            private readonly int _frameLength;
+
+            #endregion Private Fields
+
+            #region Public Constructors + Destructors
 
             /// <summary>
             /// Length of a FINS frame
             /// </summary>
             /// <param name="frameLength">Any <see cref="int"/> from <see cref="MinValue"><inheritdoc cref="MinValue"  path="//example"/></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue"  path="//example"/></see>.</param>
-            private FrameLength(int frameLength) => _frameLength = frameLength;
+            public FrameLength(int frameLength) => _frameLength = frameLength;
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
         }
 
         /// <summary>
@@ -97,7 +126,7 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct Net
         {
-            #region Fields
+            #region Public Fields
 
             /// <summary>
             /// Maximum permissible value
@@ -113,31 +142,39 @@ namespace Moravuscz.OmronPLCComm
             /// <remarks>Inclusive</remarks>
             public const int MinValue = 0;
 
+            #endregion Public Fields
+
+
+
+            #region Private Fields
+
             private readonly int _netNum;
 
-            #endregion Fields
+            #endregion Private Fields
 
-            #region Constructors
+            #region Public Constructors + Destructors
 
             /// <summary>
             /// Network Port
             /// </summary>
             /// <param name="netNumber">Any <see cref="int"/> from <see cref="MinValue"><inheritdoc cref="MinValue"  path="//example"/></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue"  path="//example"/></see>.</param>
-            private Net(int netNumber)
+            public Net(int netNumber)
             {
                 if (netNumber > MaxValue || netNumber < MinValue) { throw new ArgumentOutOfRangeException(); }
                 _netNum = netNumber;
             }
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
 
-            #region Methods
+
+
+            #region Public Methods
 
             public static implicit operator int(Net net) => net._netNum;
 
             public static implicit operator Net(int netNum) => new Net(netNum);
 
-            #endregion Methods
+            #endregion Public Methods
         }
 
         /// <summary>
@@ -145,39 +182,48 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct Node
         {
-            #region Fields
+            #region Public Fields
 
             public const int MaxValue = 255;
             public const int MinValue = 0;
+
+            #endregion Public Fields
+
+
+
+            #region Private Fields
+
             private readonly int _nodeNum;
 
-            #endregion Fields
+            #endregion Private Fields
 
-            #region Constructors
+            #region Public Constructors + Destructors
 
-            private Node(int nodeNumber)
+            public Node(int nodeNumber)
             {
                 if (nodeNumber > MaxValue || nodeNumber < MinValue) { throw new ArgumentOutOfRangeException(); }
                 _nodeNum = nodeNumber;
             }
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
 
-            #region Methods
+
+
+            #region Public Methods
 
             public static implicit operator int(Node node) => node._nodeNum;
 
             public static implicit operator Node(int nodeNum) => new Node(nodeNum);
 
-            #endregion Methods
+            #endregion Public Methods
         }
 
         /// <summary>
         /// Time to fail communicatoini
         /// </summary>
-        public struct ReponseTimeout
+        public struct ResponseTimeout
         {
-            #region Fields
+            #region Public Fields
 
             /// <summary>
             /// Maximum permissible value
@@ -193,20 +239,26 @@ namespace Moravuscz.OmronPLCComm
             /// <remarks>Inclusive</remarks>
             public const int MinValue = 0;
 
-            public readonly int _time;
+            #endregion Public Fields
 
-            #endregion Fields
 
-            #region Constructors
+
+            #region Private Fields
+
+            private readonly int _time;
+
+            #endregion Private Fields
+
+            #region Public Constructors + Destructors
 
             /// <summary>
             /// Time to fail communication
             /// </summary>
             /// <remarks>Values in seconds</remarks>
             /// <param name="time">Number of <see cref="int">seconds</see> from <see cref="MinValue"><inheritdoc cref="MinValue"  path="//example"/></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue"  path="//example"/></see>.</param>
-            private ReponseTimeout(int time) => _time = time;
+            public ResponseTimeout(int time) => _time = time;
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
         }
 
         /// <summary>
@@ -214,7 +266,7 @@ namespace Moravuscz.OmronPLCComm
         /// </summary>
         public struct SourceAddress
         {
-            #region Fields
+            #region Public Fields
 
             /// <summary>
             ///
@@ -226,24 +278,32 @@ namespace Moravuscz.OmronPLCComm
             /// </summary>
             public const int Unit = 0;
 
-            /// <summary>
-            ///
-            /// </summary>
-            public Net Net;
+            #endregion Public Fields
 
-            #endregion Fields
 
-            #region Constructors
+
+            #region Public Constructors + Destructors
 
             /// <summary>
             ///
             /// </summary>
             /// <param name="sourceNet"></param>
-            private SourceAddress(Net sourceNet) => Net = sourceNet;
+            public SourceAddress(Net sourceNet) => Net = sourceNet;
 
-            #endregion Constructors
+            #endregion Public Constructors + Destructors
+
+
+
+            #region Public Properties
+
+            /// <summary>
+            ///
+            /// </summary>
+            public Net Net { get; set; }
+
+            #endregion Public Properties
         }
 
-        #endregion Structs
+        #endregion Public Structs
     }
 }

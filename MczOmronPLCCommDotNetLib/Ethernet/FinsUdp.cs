@@ -4,27 +4,21 @@ namespace Moravuscz.OmronPLCComm.Ethernet
 {
     public class FinsUdp : ITransport, IPlcDataTransfer
     {
-        #region Properties
+        #region Public Properties
 
         public bool Connected => throw new NotImplementedException();
 
         public string LastError => throw new NotImplementedException();
 
-        #endregion Properties
+        #endregion Public Properties
 
-        #region ITransport Implementation
+
+
+        #region Public Methods
 
         public bool CloseConnection() => throw new NotImplementedException();
 
         public bool OpenConnection() => throw new NotImplementedException();
-
-        public int ReceiveData(byte[] receiveDataBuffer) => throw new NotImplementedException();
-
-        public int SendData(byte[] sendDataBuffer) => throw new NotImplementedException();
-
-        #endregion ITransport Implementation
-
-        #region IPlcDataTransfer Implementation
 
         public bool PlcReadBit(string address) => throw new NotImplementedException();
 
@@ -38,6 +32,10 @@ namespace Moravuscz.OmronPLCComm.Ethernet
 
         public bool PlcWriteWord(string startAddress, short[] values) => throw new NotImplementedException();
 
-        #endregion IPlcDataTransfer Implementation
+        public int ReceiveData(byte[] receiveDataBuffer) => throw new NotImplementedException();
+
+        public int SendData(byte[] sendDataBuffer) => throw new NotImplementedException();
+
+        #endregion Public Methods
     }
 }
