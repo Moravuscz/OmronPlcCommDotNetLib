@@ -1,7 +1,7 @@
 ﻿using System;
 using CommunicationsExample.Commands;
-using Moravuscz.OmronPLCComm;
-using Moravuscz.OmronPLCComm.Ethernet;
+using Moravuscz.OmronPlcCommunications;
+using Moravuscz.OmronPlcCommunications.Ethernet;
 
 namespace CommunicationsExample.ViewModels
 {
@@ -146,7 +146,7 @@ namespace CommunicationsExample.ViewModels
         {
             if (FinsTcpConnected)
             {
-                ResultText += _finsTcp.PlcReadWord(WriteData) + Environment.NewLine;
+                ResultText += _finsTcp.ReadWord(WriteData) + Environment.NewLine;
             }
         }
 
@@ -173,7 +173,7 @@ namespace CommunicationsExample.ViewModels
                     ),
                     frameLength: new Fins.FrameLength
                     (
-                        frameLength: Fins.FrameLength.Default
+                        length: Fins.FrameLength.Default
                     ),
                     responseTimeout: new Fins.ResponseTimeout(2)
                 ),

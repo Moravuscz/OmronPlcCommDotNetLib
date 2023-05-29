@@ -1,3 +1,0 @@
-﻿namespace Moravuscz.OmronPLCComm
-{
-}

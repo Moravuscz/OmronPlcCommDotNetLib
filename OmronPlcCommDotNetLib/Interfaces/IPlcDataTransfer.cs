@@ -1,29 +1,29 @@
-﻿namespace Moravuscz.OmronPLCComm
+﻿namespace Moravuscz.OmronPlcCommunications
 {
     public interface IPlcDataTransfer
     {
         #region Public Methods
 
         /// <summary>
-        ///
+        /// Read the value of a single bit at specified <paramref name="address"/>
         /// </summary>
         /// <param name="address"></param>
         /// <returns></returns>
-        bool PlcReadBit(string address);
+        bool ReadBit(string address);
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="word"></param>
         /// <returns></returns>
-        short PlcReadWord(string word);
+        ushort ReadWord(string word);
 
         /// <summary>
         ///
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        short[] PlcReadWord(string[] area);
+        ushort[] ReadWords(string[] area);
 
         /// <summary>
         ///
@@ -31,7 +31,7 @@
         /// <param name="address"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool PlcWriteBit(string address, bool value);
+        bool WriteBit(string address, bool value);
 
         /// <summary>
         ///
@@ -39,7 +39,7 @@
         /// <param name="address"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        bool PlcWriteWord(string address, short value);
+        bool WriteWord(string address, ushort value);
 
         /// <summary>
         ///
@@ -47,7 +47,7 @@
         /// <param name="startAddress"></param>
         /// <param name="values"></param>
         /// <returns></returns>
-        bool PlcWriteWord(string startAddress, short[] values);
+        bool WriteWords(string startAddress, ushort[] values);
 
         #endregion Public Methods
     }

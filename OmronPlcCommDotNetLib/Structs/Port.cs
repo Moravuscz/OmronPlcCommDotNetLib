@@ -1,12 +1,19 @@
 ﻿using System;
 
-namespace Moravuscz.OmronPLCComm
+namespace Moravuscz.OmronPlcCommunications
 {
     /// <summary>
     /// Network Port
     /// </summary>
+    /// <remarks>Can be used as <see cref="int"/></remarks>
     public struct Port
     {
+        #region Private Fields
+
+        private readonly int _portNum;
+
+        #endregion Private Fields
+
         #region Public Fields
 
         /// <summary>
@@ -25,14 +32,6 @@ namespace Moravuscz.OmronPLCComm
 
         #endregion Public Fields
 
-
-
-        #region Private Fields
-
-        private readonly int _portNum;
-
-        #endregion Private Fields
-
         #region Public Constructors + Destructors
 
         /// <summary>
@@ -46,8 +45,6 @@ namespace Moravuscz.OmronPLCComm
         }
 
         #endregion Public Constructors + Destructors
-
-
 
         #region Public Methods
 

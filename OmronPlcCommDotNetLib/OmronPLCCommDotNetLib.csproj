@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
+    <RootNamespace>Moravuscz.OmronPlcCommunications</RootNamespace>
+    <PackageId>Moravuscz.OmronPlcCommLib</PackageId>
+    <PackageProjectUrl>http://moravuscz.eu/projects/OmronPLCCommunicaton</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Moravuscz/OmronPLCCommDotNetLib</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Version>0.0.1</Version>
+    <Authors>Moravuscz</Authors>
+    <Company>Moravuscz</Company>
+    <Copyright>Moravuscz</Copyright>
+    <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
+    <Product>OMRON PLC Communication Library for .NET</Product>
+    <Description>A library providing an easy way to communicate with OMRON PLCs.
+
+Supports communication over Ethernet (FINS/UDP, FINS/TCP, Ethernet/IP and RS232/422/485 (HostLink).
+Toolbus and USB protocols aren't publicly documented so implementing those isn't planned.</Description>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <FileVersion>0.0.8549.15595</FileVersion>
+    <AssemblyName>Moravuscz.OmronPlcCommunications</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
+    <Reference Include="System.Xaml" />
+  </ItemGroup>
+</Project>

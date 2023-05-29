@@ -1,9 +1,6 @@
-﻿namespace Moravuscz.OmronPLCComm
+﻿namespace Moravuscz.OmronPlcCommunications
 {
-    /// <summary>
-    /// Provides network communication methods and status
-    /// </summary>
-    public interface ITransport
+    public interface IPlcCommunication
     {
         #region Public Properties
 
@@ -19,8 +16,6 @@
 
         #endregion Public Properties
 
-
-
         #region Public Methods
 
         /// <summary>
@@ -33,18 +28,6 @@
         /// </summary>
         /// <returns></returns>
         bool OpenConnection();
-
-        /// <summary>
-        /// Receive response data from PLC
-        /// </summary>
-        /// <returns>number of <see cref="byte"/>s received</returns>
-        int ReceiveData(byte[] receiveDataBuffer);
-
-        /// <summary>
-        /// Send command data to PLC
-        /// </summary>
-        /// <returns>Number of <see cref="byte"/>s sent</returns>
-        int SendData(byte[] sendDataBuffer);
 
         #endregion Public Methods
     }
