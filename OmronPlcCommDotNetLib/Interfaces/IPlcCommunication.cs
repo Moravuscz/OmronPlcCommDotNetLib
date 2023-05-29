@@ -1,4 +1,4 @@
-﻿namespace Moravuscz.OmronPlcCommunications
+﻿namespace Moravuscz.OmronPlcCommunication
 {
     public interface IPlcCommunication
     {

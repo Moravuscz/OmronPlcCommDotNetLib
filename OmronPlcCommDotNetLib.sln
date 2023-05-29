@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.33027.164
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmronPlcCommDotNetLib", "OmronPlcCommDotNetLib\OmronPlcCommDotNetLib.csproj", "{1412C94C-BEE3-4A1D-8D12-C2703E485884}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DD8D136-C2F2-45EA-A565-F0E27045F267} = {0DD8D136-C2F2-45EA-A565-F0E27045F267}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DBD3998D-71C7-4B2E-AB7B-1D9A740490EB}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunicationsExample", "CommunicationsExample\CommunicationsExample.csproj", "{7009356E-E55A-4E40-9AFD-AF670037B49F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0DD8D136-C2F2-45EA-A565-F0E27045F267} = {0DD8D136-C2F2-45EA-A565-F0E27045F267}
+		{1412C94C-BEE3-4A1D-8D12-C2703E485884} = {1412C94C-BEE3-4A1D-8D12-C2703E485884}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmronPlcCInfoDotNetLib", "..\OmronPlcCInfoDotNetLib\OmronPlcCInfoDotNetLib\OmronPlcCInfoDotNetLib.csproj", "{0DD8D136-C2F2-45EA-A565-F0E27045F267}"
 EndProject

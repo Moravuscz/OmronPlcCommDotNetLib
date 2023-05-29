@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Moravuscz.OmronPlcCommunications.Serial
+namespace Moravuscz.OmronPlcCommunication.Serial
 {
     public class HostLink //: IDataTransport, IPlcDataTransfer
     {

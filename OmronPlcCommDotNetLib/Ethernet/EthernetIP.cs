@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Moravuscz.OmronPlcCommunications.Ethernet
+namespace Moravuscz.OmronPlcCommunication.Ethernet
 {
     /// <summary>
     /// Communication over <see cref="Ethernet"/> using the <inheritdoc cref="EthernetIP" path="/DisplayName"/> protocol

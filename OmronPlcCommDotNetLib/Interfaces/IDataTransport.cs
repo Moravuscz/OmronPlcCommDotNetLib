@@ -1,4 +1,4 @@
-﻿namespace Moravuscz.OmronPlcCommunications
+﻿namespace Moravuscz.OmronPlcCommunication
 {
     /// <summary>
     /// Provides network communication methods and status

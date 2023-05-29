@@ -1,7 +1,7 @@
 ﻿using System;
 using CommunicationsExample.Commands;
-using Moravuscz.OmronPlcCommunications;
-using Moravuscz.OmronPlcCommunications.Ethernet;
+using Moravuscz.OmronPlcCommunication;
+using Moravuscz.OmronPlcCommunication.Ethernet;
 
 namespace CommunicationsExample.ViewModels
 {
@@ -177,7 +177,7 @@ namespace CommunicationsExample.ViewModels
                     ),
                     responseTimeout: new Fins.ResponseTimeout(2)
                 ),
-                iPAddress: System.Net.IPAddress.Parse(IPAddress),
+                remoteIpAddress: System.Net.IPAddress.Parse(IPAddress),
                 port: new Port(int.Parse(FinsPort))
             );
         }

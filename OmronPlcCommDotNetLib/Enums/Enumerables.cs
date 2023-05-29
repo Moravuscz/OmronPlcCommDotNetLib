@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Moravuscz.OmronPlcCommunications
+namespace Moravuscz.OmronPlcCommunication
 {
     public enum CommType
     {

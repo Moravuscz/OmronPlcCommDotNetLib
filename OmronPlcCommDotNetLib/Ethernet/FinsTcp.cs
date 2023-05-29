@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 
-namespace Moravuscz.OmronPlcCommunications.Ethernet
+namespace Moravuscz.OmronPlcCommunication.Ethernet
 {
     /// <summary>
     /// Communication over <see cref="Ethernet" /> using the <inheritdoc cref="FinsTcp" path="/DisplayName" /> protocol

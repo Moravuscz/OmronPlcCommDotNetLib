@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Moravuscz.OmronPlcCommunications
+namespace Moravuscz.OmronPlcCommunication
 {
     /// <summary>
     /// Network Port

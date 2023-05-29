@@ -1,7 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net46</TargetFramework>
     <RootNamespace>CommunicationsExample</RootNamespace>
-    <UseWPF>true</UseWPF>
+    <FileVersion>1.0.8549.18540</FileVersion>
+    <OutputType>WinExe</OutputType>
   </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\MainWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\OmronPlcCInfoDotNetLib\OmronPlcCInfoDotNetLib\OmronPlcCInfoDotNetLib.csproj" />
+    <ProjectReference Include="..\OmronPlcCommDotNetLib\OmronPlcCommDotNetLib.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
 </Project>
