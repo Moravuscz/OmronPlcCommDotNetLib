@@ -1,18 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
     <RootNamespace>Moravuscz.OmronPlcCommunication</RootNamespace>
     <AssemblyName>Moravuscz.OmronPlcCommunication</AssemblyName>
-    <PackageId>Moravuscz.OmronPlcCommLib</PackageId>
-    <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunicaton</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>0.0.1</Version>
     <Authors>Moravuscz</Authors>
     <Company>Moravuscz</Company>
     <Copyright>Moravuscz</Copyright>
-    <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
     <Product>OMRON PLC Communication Library for .NET</Product>
     <Description>A library providing an easy way to communicate with OMRON PLCs.
 
@@ -20,9 +12,20 @@ Supports communication over Ethernet (FINS/UDP, FINS/TCP, Ethernet/IP and RS232/
 Toolbus and USB protocols aren't publicly documented so implementing those isn't planned.</Description>
     
     <FileVersion>0.0.8549.18727</FileVersion>
+    <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Moravuscz.OmronPlcCommLib</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunicaton</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib</RepositoryUrl>
+    <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
+    <Version>0.0.1</Version>
     <IncludeSymbols>true</IncludeSymbols>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
