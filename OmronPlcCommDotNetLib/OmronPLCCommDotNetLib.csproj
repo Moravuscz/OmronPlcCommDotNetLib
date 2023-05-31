@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <AssemblyName>eu.Moravuscz.OmronPlcCommunication</AssemblyName>
     <RootNamespace>Moravuscz.OmronPlcCommunication</RootNamespace>
-    <AssemblyName>Moravuscz.OmronPlcCommunication</AssemblyName>
     <Authors>Moravuscz</Authors>
     <Company>Moravuscz</Company>
     <Copyright>Moravuscz</Copyright>
@@ -11,16 +11,17 @@
 Supports communication over Ethernet (FINS/UDP, FINS/TCP, Ethernet/IP and RS232/422/485 (HostLink).
 Toolbus and USB protocols aren't publicly documented so implementing those isn't planned.</Description>
     
-    <FileVersion>0.0.8549.18727</FileVersion>
+    <FileVersion>0.1.8550.21826</FileVersion>
     <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>D:\develop\nuget_packages\</PackageOutputPath>
     <PackageId>Moravuscz.OmronPlcCommLib</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunicaton</PackageProjectUrl>
+    <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunication</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib.git</RepositoryUrl>
     <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
-    <Version>0.0.1</Version>
+    <Version>0.1.0</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -30,13 +31,11 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
-  </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.0.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.1.0" />
   </ItemGroup>
 </Project>

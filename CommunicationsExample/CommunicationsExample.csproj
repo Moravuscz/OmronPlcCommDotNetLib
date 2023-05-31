@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>net46</TargetFramework>
     <RootNamespace>CommunicationsExample</RootNamespace>
-    <FileVersion>1.0.8549.18727</FileVersion>
+    <FileVersion>1.0.8550.21826</FileVersion>
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup>
