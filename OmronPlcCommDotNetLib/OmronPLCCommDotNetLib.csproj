@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>eu.Moravuscz.OmronPlcCommunication</AssemblyName>
+    <AssemblyName>Moravuscz.OmronPlcCommunication</AssemblyName>
     <RootNamespace>Moravuscz.OmronPlcCommunication</RootNamespace>
     <Authors>Moravuscz</Authors>
     <Company>Moravuscz</Company>
@@ -11,11 +11,11 @@
 Supports communication over Ethernet (FINS/UDP, FINS/TCP, Ethernet/IP and RS232/422/485 (HostLink).
 Toolbus and USB protocols aren't publicly documented so implementing those isn't planned.</Description>
     
-    <FileVersion>0.1.8550.21826</FileVersion>
+    <FileVersion>0.1.8551.11451</FileVersion>
     <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>D:\develop\nuget_packages\</PackageOutputPath>
-    <PackageId>Moravuscz.OmronPlcCommLib</PackageId>
+    <PackageId>Moravuscz.OmronPlcCommunication</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunication</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
