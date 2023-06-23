@@ -1,12 +1,13 @@
 ﻿using System;
 
+
 namespace Moravuscz.OmronPlcCommunication
 {
     /// <summary>
     /// Communication protocol for OMRON PLCs
     /// </summary>
     /// <remarks>FINS = Factory Interface Network Service</remarks>
-    public class Fins
+    public abstract class Fins
     {
         #region Public Structs
 
@@ -16,7 +17,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// <remarks>Consists of <see cref="SourceAddress.SourceAddress(Net)" />, <see cref="DestinationAddress.DestinationAddress(Net, Node)" />, <see cref="FrameLength.FrameLength(int)" /> and <see cref="ResponseTimeout.ResponseTimeout(int)" /></remarks>
         public struct Config
         {
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -60,7 +60,6 @@ namespace Moravuscz.OmronPlcCommunication
             public SourceAddress SourceAddress { get; set; }
 
             #endregion Public Properties
-
         }
 
         /// <summary>
@@ -69,7 +68,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// <remarks>Consists of <see cref="Fins.Net" /> and <see cref="Fins.Node" /></remarks>
         public struct DestinationAddress
         {
-
             #region Public Fields
 
             /// <inheritdoc cref="Fins.Unit" />
@@ -109,7 +107,6 @@ namespace Moravuscz.OmronPlcCommunication
             public Node Node { get; set; }
 
             #endregion Public Properties
-
         }
 
         /// <summary>
@@ -117,7 +114,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// </summary>
         public struct FrameLength
         {
-
             #region Public Fields
 
             /// <summary>
@@ -180,7 +176,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator int(FrameLength length) => length.Value;
 
             #endregion Public Methods
-
         }
 
         /// <summary>
@@ -188,7 +183,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// </summary>
         public struct Net
         {
-
             #region Public Fields
 
             /// <summary>
@@ -229,6 +223,7 @@ namespace Moravuscz.OmronPlcCommunication
             public int Value { get; }
 
             #endregion Public Properties
+
             #region Public Methods
 
             /// <summary>
@@ -244,7 +239,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator Net(int netNum) => new Net(netNum);
 
             #endregion Public Methods
-
         }
 
         /// <summary>
@@ -252,7 +246,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// </summary>
         public struct Node
         {
-
             #region Public Fields
 
             /// <summary>
@@ -293,6 +286,7 @@ namespace Moravuscz.OmronPlcCommunication
             public int Value { get; }
 
             #endregion Public Properties
+
             #region Public Methods
 
             /// <summary>
@@ -308,7 +302,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator Node(int nodeNum) => new Node(nodeNum);
 
             #endregion Public Methods
-
         }
 
         /// <summary>
@@ -316,7 +309,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// </summary>
         public struct ResponseTimeout
         {
-
             #region Public Fields
 
             /// <summary>
@@ -375,7 +367,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator ResponseTimeout(int time) => new ResponseTimeout(time);
 
             #endregion Public Methods
-
         }
 
         /// <summary>
@@ -384,7 +375,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// <remarks><inheritdoc cref="DestinationAddress" path="/remarks" /></remarks>
         public struct SourceAddress
         {
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -436,7 +426,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator SourceAddress(int netNumber) => new SourceAddress(netNumber);
 
             #endregion Public Methods
-
         }
 
         /// <summary>
@@ -444,7 +433,6 @@ namespace Moravuscz.OmronPlcCommunication
         /// </summary>
         public struct Unit
         {
-
             #region Public Fields
 
             /// <summary>
@@ -484,6 +472,7 @@ namespace Moravuscz.OmronPlcCommunication
             public int Value { get; }
 
             #endregion Public Properties
+
             #region Public Methods
 
             /// <summary>
@@ -499,7 +488,6 @@ namespace Moravuscz.OmronPlcCommunication
             public static implicit operator Unit(int unitNumber) => new Unit(unitNumber);
 
             #endregion Public Methods
-
         }
 
         #endregion Public Structs
