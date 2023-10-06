@@ -312,6 +312,12 @@ namespace Moravuscz.OmronPlcCommunication
             #region Public Fields
 
             /// <summary>
+            /// Default value
+            /// </summary>
+            /// <value>2000</value>
+            public const int Default = 2;
+
+            /// <summary>
             /// Maximum permissible value
             /// </summary>
             /// <value>600</value>

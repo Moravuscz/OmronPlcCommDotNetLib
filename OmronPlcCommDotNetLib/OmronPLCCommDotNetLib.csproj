@@ -21,7 +21,7 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib.git</RepositoryUrl>
     <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
-    <Version>0.1.0</Version>
+    <Version>0.1.2</Version>
     <IncludeSymbols>true</IncludeSymbols>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -30,6 +30,12 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net46|AnyCPU'">
+    <DocumentationFile>C:\Users\moravek\source\repos\OmronPlcCommDotNetLib\OmronPlcCommDotNetLib\Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
+    <DocumentationFile>C:\Users\moravek\source\repos\OmronPlcCommDotNetLib\OmronPlcCommDotNetLib\Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <Reference Include="System.Xaml" />
