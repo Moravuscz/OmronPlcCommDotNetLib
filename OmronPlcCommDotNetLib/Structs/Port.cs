@@ -5,15 +5,9 @@ namespace Moravuscz.OmronPlcCommunication
     /// <summary>
     /// Network Port
     /// </summary>
-    /// <remarks>Can be used as <see cref="int"/></remarks>
+    /// <remarks>Can be used as <see cref="int" /></remarks>
     public struct Port
     {
-        #region Private Fields
-
-        private readonly int _portNum;
-
-        #endregion Private Fields
-
         #region Public Fields
 
         /// <summary>
@@ -32,15 +26,20 @@ namespace Moravuscz.OmronPlcCommunication
 
         #endregion Public Fields
 
+        #region Private Fields
+
+        private readonly int _portNum;
+
+        #endregion Private Fields
         #region Public Constructors + Destructors
 
         /// <summary>
         /// Network Port
         /// </summary>
-        /// <param name="portNumber">Any <see cref="int"/> from <see cref="MinValue"><inheritdoc cref="MinValue"  path="//example"/></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue"  path="//example"/></see>.</param>
+        /// <param name="portNumber">Any <see cref="int" /> from <see cref="MinValue"><inheritdoc cref="MinValue" path="//example" /></see> to <see cref="MaxValue"><inheritdoc cref="MaxValue" path="//example" /></see>.</param>
         public Port(int portNumber)
         {
-            if (portNumber > MaxValue || portNumber < MinValue) { throw new ArgumentOutOfRangeException(); }
+            if (portNumber > MaxValue || portNumber < MinValue) { throw new ArgumentOutOfRangeException(nameof(portNumber), $"Value \"{portNumber}\" is out of range! Valid range is {MinValue} to {MaxValue}"); }
             _portNum = portNumber;
         }
 
@@ -49,17 +48,21 @@ namespace Moravuscz.OmronPlcCommunication
         #region Public Methods
 
         /// <summary>
-        /// Allow <see cref="Port"/> to be used same as <see cref="int"/>
+        /// Allow <see cref="Port" /> to be used same as <see cref="int" />
         /// </summary>
         /// <param name="port"></param>
         public static implicit operator int(Port port) => port._portNum;
 
         /// <summary>
-        /// Define <see cref="Port"/> with <see cref="int"/> as parameter for its value
+        /// Define <see cref="Port" /> with <see cref="int" /> as parameter for its value
         /// </summary>
         /// <param name="portNumber"></param>
         public static implicit operator Port(int portNumber) => new Port(portNumber);
 
+        /// <summary>
+        /// Converts the <see cref="Port" /> number of this instance to its equivalent <see cref="string" /> representation
+        /// </summary>
+        /// <returns><see cref="Port" /> number as <see cref="string" /></returns>
         public override string ToString() => _portNum.ToString();
 
         #endregion Public Methods

@@ -2,6 +2,10 @@
 
 namespace Moravuscz.OmronPlcCommunication.Serial
 {
+    /// <summary>
+    /// Communication over <see cref="Serial"/> using the <inheritdoc cref="HostLink" path="/DisplayName"/> protocol
+    /// </summary>
+    /// <DisplayName>Host Link</DisplayName>
     public class HostLink //: IDataTransport, IPlcDataTransfer
     {
         #region Public Properties
