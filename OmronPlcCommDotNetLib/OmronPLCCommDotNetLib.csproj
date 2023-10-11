@@ -46,7 +46,7 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
       <AssemblyVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</AssemblyVersion>
       <FileVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</FileVersion>
       <InformationalVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch).$(GitCommits)+$(GitCommit)</InformationalVersion>
-      <PackageVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitCommits)</PackageVersion>
+      <PackageVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</PackageVersion>
       <RepositoryBranch>$(GitBranch)</RepositoryBranch>
       <RepositoryCommit>$(GitCommit)</RepositoryCommit>
     </PropertyGroup>
