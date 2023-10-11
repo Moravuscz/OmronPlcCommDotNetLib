@@ -2,6 +2,17 @@
 
 namespace Moravuscz.OmronPlcCommunication
 {
+    /// <summary>
+    /// Communication type
+    /// </summary>
+    /// <remarks>
+    /// <list type="number">
+    /// <item><see cref="FinsTCP">FINS/TCP</see></item>
+    /// <item><see cref="FinsUDP">FINS/UDP</see></item>
+    /// <item><see cref="EthernetIP">Ethernet/IP</see></item>
+    /// <item><see cref="HostLink">Serial Host Link</see></item>
+    /// </list>
+    /// </remarks>
     public enum CommType
     {
         /// <summary><inheritdoc cref="Ethernet.FinsTcp" path="/summary"/></summary>

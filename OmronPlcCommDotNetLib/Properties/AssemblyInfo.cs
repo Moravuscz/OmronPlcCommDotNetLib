@@ -15,7 +15,7 @@ using System.Windows.Markup;
  */
 
 [assembly: XmlnsPrefix("https://github.com/Moravuscz/OmronPLCCommDotNetLib", "OmrPLCComm")]
-[assembly: XmlnsDefinition("https://github.com/Moravuscz/OmronPLCCommDotNetLib", "Moravuscz.OmronPlcCommunication")]
+[assembly: XmlnsDefinition("https://github.com/Moravuscz/OmronPLCCommDotNetLib", "Moravuscz.OmronPlcCommunication", AssemblyName = "Moravuscz.OmronPlcCommunication")]
 #endif
 
 // Setting ComVisible to false makes the types in this assembly not visible to COM

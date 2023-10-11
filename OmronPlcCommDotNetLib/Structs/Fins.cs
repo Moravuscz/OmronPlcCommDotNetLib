@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Moravuscz.OmronPlcCommunication
 {
     /// <summary>
@@ -9,12 +8,22 @@ namespace Moravuscz.OmronPlcCommunication
     /// <remarks>FINS = Factory Interface Network Service</remarks>
     public abstract class Fins
     {
+        #region Public Fields
+
+        /// <summary>
+        /// Default FINS <see cref="Port" />
+        /// </summary>
+        /// <value>9600</value>
+        public static readonly Port DefaultPort = 9600;
+
+        #endregion Public Fields
+
         #region Public Structs
 
         /// <summary>
         /// Encapsulates FINS Communication Settings
         /// </summary>
-        /// <remarks>Consists of <see cref="SourceAddress.SourceAddress(Net)" />, <see cref="DestinationAddress.DestinationAddress(Net, Node)" />, <see cref="FrameLength.FrameLength(int)" /> and <see cref="ResponseTimeout.ResponseTimeout(int)" /></remarks>
+        /// <remarks>Consists of <see cref="SourceAddress.SourceAddress(Net, Node, Unit)" />, <see cref="DestinationAddress.DestinationAddress(Net, Node, Unit)" />, <see cref="FrameLength.FrameLength(int)" /> and <see cref="ResponseTimeout.ResponseTimeout(int)" /></remarks>
         public struct Config
         {
             #region Public Constructors + Destructors
@@ -31,8 +40,8 @@ namespace Moravuscz.OmronPlcCommunication
             /// <item><paramref name="responseTimeout" /> = <inheritdoc cref="Config(SourceAddress, DestinationAddress, FrameLength, ResponseTimeout)" path="/param[@name='responseTimeout']" /></item>
             /// </list>
             /// </remarks>
-            /// <param name="sourceAddress"><see cref="Net" />(<inheritdoc cref="SourceAddress.SourceAddress(Net)" />)</param>
-            /// <param name="destinationAddress"><see cref="Net" />(<inheritdoc cref="DestinationAddress.DestinationAddress(Net, Node)" path="/param[@name='destinationNet']" />), <see cref="Node" />( <inheritdoc cref="DestinationAddress.DestinationAddress(Net, Node)" path="/param[@name='destinationNode']" />)</param>
+            /// <param name="sourceAddress"><see cref="Net" />(<inheritdoc cref="Net(int)" />), <see cref="Node" />(<inheritdoc cref="Node(int)" />), <see cref="Unit" />(<inheritdoc cref="Unit(int)" />)</param>
+            /// <param name="destinationAddress"><see cref="Net" />(<inheritdoc cref="Net(int)" />), <see cref="Node" />(<inheritdoc cref="Node(int)" />), <see cref="Unit" />(<inheritdoc cref="Unit(int)" />)</param>
             /// <param name="frameLength"><see cref="Fins.FrameLength" />(<inheritdoc cref="FrameLength.FrameLength(int)" />)</param>
             /// <param name="responseTimeout"><see cref="Fins.ResponseTimeout" />(<inheritdoc cref="ResponseTimeout.ResponseTimeout(int)" />)</param>
             public Config(SourceAddress sourceAddress, DestinationAddress destinationAddress, FrameLength frameLength, ResponseTimeout responseTimeout)
@@ -47,35 +56,27 @@ namespace Moravuscz.OmronPlcCommunication
 
             #region Public Properties
 
-            /// <inheritdoc cref="DestinationAddress.DestinationAddress(Net, Node)" />
-            public DestinationAddress DestinationAddress { get; set; }
+            /// <inheritdoc cref="DestinationAddress.DestinationAddress(Net, Node, Unit)" />
+            public DestinationAddress DestinationAddress { get; }
 
             /// <inheritdoc cref="FrameLength.FrameLength(int)" />
-            public FrameLength FrameLength { get; set; }
+            public FrameLength FrameLength { get; }
 
             /// <inheritdoc cref="ResponseTimeout.ResponseTimeout(int)" />
-            public ResponseTimeout ResponseTimeout { get; set; }
+            public ResponseTimeout ResponseTimeout { get; }
 
-            /// <inheritdoc cref="SourceAddress.SourceAddress(Net)" />
-            public SourceAddress SourceAddress { get; set; }
+            /// <inheritdoc cref="SourceAddress.SourceAddress(Net, Node, Unit)" />
+            public SourceAddress SourceAddress { get; }
 
             #endregion Public Properties
         }
 
         /// <summary>
-        /// FINS Destination Address
+        /// Destination address in FINS communication
         /// </summary>
-        /// <remarks>Consists of <see cref="Fins.Net" /> and <see cref="Fins.Node" /></remarks>
+        /// <remarks>Consists of <see cref="Fins.Net" />, <see cref="Fins.Node" /> and <see cref="Fins.Unit"/></remarks>
         public struct DestinationAddress
         {
-            #region Public Fields
-
-            /// <inheritdoc cref="Fins.Unit" />
-            /// <value>0</value>
-            public static Unit Unit = 0;
-
-            #endregion Public Fields
-
             #region Public Constructors + Destructors
 
             /// <summary>
@@ -84,16 +85,19 @@ namespace Moravuscz.OmronPlcCommunication
             /// <remarks>
             /// <inheritdoc cref="DestinationAddress" path="/remarks" />
             /// <list type="number">
-            /// <item><paramref name="destinationNet" /> = <see cref="Fins.Net" />(<inheritdoc cref="DestinationAddress(Net, Node)" path="/param[@name='destinationNet']" />)</item>
-            /// <item><paramref name="destinationNode" /> = <see cref="Fins.Node" />(<inheritdoc cref="DestinationAddress(Net, Node)" path="/param[@name='destinationNode']" />)</item>
+            /// <item><paramref name="destinationNet" /> = <see cref="Fins.Net" />(<inheritdoc cref="DestinationAddress(Net, Node, Unit)" path="/param[@name='destinationNet']" />)</item>
+            /// <item><paramref name="destinationNode" /> = <see cref="Fins.Node" />(<inheritdoc cref="DestinationAddress(Net, Node, Unit)" path="/param[@name='destinationNode']" />)</item>
+            /// <item><paramref name="destinationUnit" /> = <see cref="Fins.Unit" />(<inheritdoc cref="DestinationAddress(Net, Node, Unit)" path="/param[@name='destinationUnit']" />)</item>
             /// </list>
             /// </remarks>
             /// <param name="destinationNet"><inheritdoc cref="Net.Net(int)" path="/param[@name='netNumber']" /></param>
             /// <param name="destinationNode"><inheritdoc cref="Node.Node(int)" path="/param[@name='nodeNumber']" /></param>
-            public DestinationAddress(Net destinationNet, Node destinationNode)
+            /// <param name="destinationUnit"><inheritdoc cref="Unit.Unit(int)" path="/param[@name='unitNumber']" /></param>
+            public DestinationAddress(Net destinationNet, Node destinationNode, Unit destinationUnit)
             {
                 Net = destinationNet;
                 Node = destinationNode;
+                Unit = destinationUnit;
             }
 
             #endregion Public Constructors + Destructors
@@ -101,10 +105,14 @@ namespace Moravuscz.OmronPlcCommunication
             #region Public Properties
 
             /// <inheritdoc cref="Fins.Net" />
-            public Net Net { get; set; }
+            public Net Net { get; }
 
             /// <inheritdoc cref="Fins.Node" />
-            public Node Node { get; set; }
+            public Node Node { get; }
+
+            /// <inheritdoc cref="Fins.Unit" />
+            /// <value>0</value>
+            public Unit Unit { get; }
 
             #endregion Public Properties
         }
@@ -112,7 +120,7 @@ namespace Moravuscz.OmronPlcCommunication
         /// <summary>
         /// Length of a FINS frame
         /// </summary>
-        public struct FrameLength
+        public struct FrameLength : IConvertible
         {
             #region Public Fields
 
@@ -167,7 +175,12 @@ namespace Moravuscz.OmronPlcCommunication
             /// Treat <see cref="FrameLength" /> as <see cref="int" /> when assigning <see langword="value" />
             /// </summary>
             /// <param name="length"><inheritdoc cref="FrameLength(int)" /></param>
+            #if NET46_OR_GREATER
             public static implicit operator FrameLength(int length) => new FrameLength(length);
+            #endif
+            #if NET5_0_OR_GREATER
+            public static implicit operator FrameLength(int length) => new(length);
+            #endif
 
             /// <summary>
             /// Treat <see cref="FrameLength" /> as <see cref="int" /> when retrieving <see langword="value" />
@@ -175,13 +188,35 @@ namespace Moravuscz.OmronPlcCommunication
             /// <param name="length"><inheritdoc cref="FrameLength(int)" /></param>
             public static implicit operator int(FrameLength length) => length.Value;
 
+            #region IConvertible
+            #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public TypeCode GetTypeCode() => Convert.GetTypeCode(Value);
+            public bool ToBoolean(IFormatProvider provider) => Convert.ToBoolean(Value, provider);
+            public byte ToByte(IFormatProvider provider) => Convert.ToByte(Value, provider);
+            public char ToChar(IFormatProvider provider) => Convert.ToChar(Value, provider);
+            public DateTime ToDateTime(IFormatProvider provider) => Convert.ToDateTime(Value, provider);
+            public decimal ToDecimal(IFormatProvider provider) => Convert.ToDecimal(Value, provider);
+            public double ToDouble(IFormatProvider provider) => Convert.ToDouble(Value, provider);
+            public short ToInt16(IFormatProvider provider) => Convert.ToInt16(Value, provider);
+            public int ToInt32(IFormatProvider provider) => Convert.ToInt32(Value, provider);
+            public long ToInt64(IFormatProvider provider) => Convert.ToInt64(Value, provider);
+            public sbyte ToSByte(IFormatProvider provider) => Convert.ToSByte(Value, provider);
+            public float ToSingle(IFormatProvider provider) => Convert.ToSingle(Value, provider);
+            public string ToString(IFormatProvider provider) => Convert.ToString(Value, provider);
+            public object ToType(Type conversionType, IFormatProvider provider) => Convert.ChangeType(Value, conversionType);
+            public ushort ToUInt16(IFormatProvider provider) => Convert.ToUInt16(Value, provider);
+            public uint ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value, provider);
+            public ulong ToUInt64(IFormatProvider provider) => Convert.ToUInt64(Value, provider);
+            #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+            #endregion IConvertible
+
             #endregion Public Methods
         }
 
         /// <summary>
         /// FINS Network Number
         /// </summary>
-        public struct Net
+        public struct Net : IConvertible
         {
             #region Public Fields
 
@@ -218,7 +253,7 @@ namespace Moravuscz.OmronPlcCommunication
             #region Public Properties
 
             /// <summary>
-            /// <inheritdoc cref="Net(int)" path="/param[@name='netNumber']"/>
+            /// <inheritdoc cref="Net(int)" path="/param[@name='netNumber']" />
             /// </summary>
             public int Value { get; }
 
@@ -236,7 +271,34 @@ namespace Moravuscz.OmronPlcCommunication
             /// Treat <see cref="Net" /> as <see cref="int" /> when assigning <see langword="value" />
             /// </summary>
             /// <param name="netNum"><inheritdoc cref="Net(int)" /></param>
-            public static implicit operator Net(int netNum) => new Net(netNum);
+            #if NET46_OR_GREATER
+            public static explicit operator Net(int netNum) => new Net(netNum);
+            #endif
+            #if NET5_0_OR_GREATER
+            public static explicit operator Net(int netNum) => new(netNum);
+            #endif
+
+            #region IConvertible
+            #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public TypeCode GetTypeCode() => Convert.GetTypeCode(Value);
+            public bool ToBoolean(IFormatProvider provider) => Convert.ToBoolean(Value, provider);
+            public byte ToByte(IFormatProvider provider) => Convert.ToByte(Value, provider);
+            public char ToChar(IFormatProvider provider) => Convert.ToChar(Value, provider);
+            public DateTime ToDateTime(IFormatProvider provider) => Convert.ToDateTime(Value, provider);
+            public decimal ToDecimal(IFormatProvider provider) => Convert.ToDecimal(Value, provider);
+            public double ToDouble(IFormatProvider provider) => Convert.ToDouble(Value, provider);
+            public short ToInt16(IFormatProvider provider) => Convert.ToInt16(Value, provider);
+            public int ToInt32(IFormatProvider provider) => Convert.ToInt32(Value, provider);
+            public long ToInt64(IFormatProvider provider) => Convert.ToInt64(Value, provider);
+            public sbyte ToSByte(IFormatProvider provider) => Convert.ToSByte(Value, provider);
+            public float ToSingle(IFormatProvider provider) => Convert.ToSingle(Value, provider);
+            public string ToString(IFormatProvider provider) => Convert.ToString(Value, provider);
+            public object ToType(Type conversionType, IFormatProvider provider) => Convert.ChangeType(Value, conversionType);
+            public ushort ToUInt16(IFormatProvider provider) => Convert.ToUInt16(Value, provider);
+            public uint ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value, provider);
+            public ulong ToUInt64(IFormatProvider provider) => Convert.ToUInt64(Value, provider);
+            #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+            #endregion IConvertible
 
             #endregion Public Methods
         }
@@ -244,7 +306,7 @@ namespace Moravuscz.OmronPlcCommunication
         /// <summary>
         /// FINS Node Number
         /// </summary>
-        public struct Node
+        public struct Node : IConvertible
         {
             #region Public Fields
 
@@ -281,7 +343,7 @@ namespace Moravuscz.OmronPlcCommunication
             #region Public Properties
 
             /// <summary>
-            /// <inheritdoc cref="Node(int)" path="/param[@name='nodeNumber']"/>
+            /// <inheritdoc cref="Node(int)" path="/param[@name='nodeNumber']" />
             /// </summary>
             public int Value { get; }
 
@@ -299,7 +361,34 @@ namespace Moravuscz.OmronPlcCommunication
             /// Treat <see cref="Node" /> as <see cref="int" /> when assigning <see langword="value" />
             /// </summary>
             /// <param name="nodeNum"><inheritdoc cref="Node(int)" /></param>
-            public static implicit operator Node(int nodeNum) => new Node(nodeNum);
+            #if NET46_OR_GREATER
+            public static explicit operator Node(int nodeNum) => new Node(nodeNum);
+            #endif
+            #if NET5_0_OR_GREATER
+            public static explicit operator Node(int nodeNum) => new(nodeNum);
+            #endif
+
+            #region IConvertible
+            #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public TypeCode GetTypeCode() => Convert.GetTypeCode(Value);
+            public bool ToBoolean(IFormatProvider provider) => Convert.ToBoolean(Value, provider);
+            public byte ToByte(IFormatProvider provider) => Convert.ToByte(Value, provider);
+            public char ToChar(IFormatProvider provider) => Convert.ToChar(Value, provider);
+            public DateTime ToDateTime(IFormatProvider provider) => Convert.ToDateTime(Value, provider);
+            public decimal ToDecimal(IFormatProvider provider) => Convert.ToDecimal(Value, provider);
+            public double ToDouble(IFormatProvider provider) => Convert.ToDouble(Value, provider);
+            public short ToInt16(IFormatProvider provider) => Convert.ToInt16(Value, provider);
+            public int ToInt32(IFormatProvider provider) => Convert.ToInt32(Value, provider);
+            public long ToInt64(IFormatProvider provider) => Convert.ToInt64(Value, provider);
+            public sbyte ToSByte(IFormatProvider provider) => Convert.ToSByte(Value, provider);
+            public float ToSingle(IFormatProvider provider) => Convert.ToSingle(Value, provider);
+            public string ToString(IFormatProvider provider) => Convert.ToString(Value, provider);
+            public object ToType(Type conversionType, IFormatProvider provider) => Convert.ChangeType(Value, conversionType);
+            public ushort ToUInt16(IFormatProvider provider) => Convert.ToUInt16(Value, provider);
+            public uint ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value, provider);
+            public ulong ToUInt64(IFormatProvider provider) => Convert.ToUInt64(Value, provider);
+            #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+            #endregion IConvertible
 
             #endregion Public Methods
         }
@@ -307,7 +396,7 @@ namespace Moravuscz.OmronPlcCommunication
         /// <summary>
         /// Time to fail FINS communication
         /// </summary>
-        public struct ResponseTimeout
+        public struct ResponseTimeout : IConvertible
         {
             #region Public Fields
 
@@ -334,7 +423,7 @@ namespace Moravuscz.OmronPlcCommunication
             #endregion Public Fields
 
             #region Public Constructors + Destructors
-
+            
             /// <summary>
             /// <inheritdoc cref="ResponseTimeout" path="/summary" />
             /// </summary>
@@ -370,7 +459,34 @@ namespace Moravuscz.OmronPlcCommunication
             /// Treat <see cref="ResponseTimeout" /> as <see cref="int" /> when assigning <see langword="value" />
             /// </summary>
             /// <param name="time"><inheritdoc cref="ResponseTimeout(int)" /></param>
+            #if NET46_OR_GREATER
             public static implicit operator ResponseTimeout(int time) => new ResponseTimeout(time);
+            #endif
+            #if NET5_0_OR_GREATER
+            public static implicit operator ResponseTimeout(int time) => new(time);
+            #endif
+
+            #region IConvertible
+            #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public TypeCode GetTypeCode() => Convert.GetTypeCode(Value);
+            public bool ToBoolean(IFormatProvider provider) => Convert.ToBoolean(Value, provider);
+            public byte ToByte(IFormatProvider provider) => Convert.ToByte(Value, provider);
+            public char ToChar(IFormatProvider provider) => Convert.ToChar(Value, provider);
+            public DateTime ToDateTime(IFormatProvider provider) => Convert.ToDateTime(Value, provider);
+            public decimal ToDecimal(IFormatProvider provider) => Convert.ToDecimal(Value, provider);
+            public double ToDouble(IFormatProvider provider) => Convert.ToDouble(Value, provider);
+            public short ToInt16(IFormatProvider provider) => Convert.ToInt16(Value, provider);
+            public int ToInt32(IFormatProvider provider) => Convert.ToInt32(Value, provider);
+            public long ToInt64(IFormatProvider provider) => Convert.ToInt64(Value, provider);
+            public sbyte ToSByte(IFormatProvider provider) => Convert.ToSByte(Value, provider);
+            public float ToSingle(IFormatProvider provider) => Convert.ToSingle(Value, provider);
+            public string ToString(IFormatProvider provider) => Convert.ToString(Value, provider);
+            public object ToType(Type conversionType, IFormatProvider provider) => Convert.ChangeType(Value, conversionType);
+            public ushort ToUInt16(IFormatProvider provider) => Convert.ToUInt16(Value, provider);
+            public uint ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value, provider);
+            public ulong ToUInt64(IFormatProvider provider) => Convert.ToUInt64(Value, provider);
+            #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+            #endregion IConvertible
 
             #endregion Public Methods
         }
@@ -388,11 +504,20 @@ namespace Moravuscz.OmronPlcCommunication
             /// </summary>
             /// <remarks>
             /// <list type="number">
-            /// <item><paramref name="sourceNet" /> = <see cref="Fins.Net" />(<inheritdoc cref="SourceAddress(Net)" path="/param[@name='sourceNet']" />)</item>
+            /// <item><paramref name="sourceNet" /> = <see cref="Fins.Net" />(<inheritdoc cref="SourceAddress(Net, Node, Unit)" path="/param[@name='sourceNet']" />)</item>
+            /// <item><paramref name="sourceNode" /> = <see cref="Fins.Node" />(<inheritdoc cref="SourceAddress(Net, Node, Unit)" path="/param[@name='sourceNode']" />)</item>
+            /// <item><paramref name="sourceUnit" /> = <see cref="Fins.Unit" />(<inheritdoc cref="SourceAddress(Net, Node, Unit)" path="/param[@name='sourceUnit']" />)</item>
             /// </list>
             /// </remarks>
             /// <param name="sourceNet"><inheritdoc cref="Net.Net(int)" /></param>
-            public SourceAddress(Net sourceNet) => Net = sourceNet;
+            /// <param name="sourceNode"><inheritdoc cref="Node.Node(int)" /></param>
+            /// <param name="sourceUnit"><inheritdoc cref="Unit.Unit(int)" /></param>
+            public SourceAddress(Net sourceNet, Node sourceNode, Unit sourceUnit)
+            {
+                Net = sourceNet;
+                Node = sourceNode;
+                Unit = sourceUnit;
+            }
 
             #endregion Public Constructors + Destructors
 
@@ -402,13 +527,13 @@ namespace Moravuscz.OmronPlcCommunication
             /// <see cref="Fins.Node" /> in <see cref="SourceAddress" /> is always <inheritdoc cref="Node" path="/value" />
             /// </summary>
             /// <value>0</value>
-            public static Node Node { get; } = 0;
+            public Node Node { get; }
 
             /// <summary>
             /// <see cref="Fins.Unit" /> in <see cref="SourceAddress" /> is always <inheritdoc cref="Unit" path="/value" />
             /// </summary>
             /// <value>0</value>
-            public static Unit Unit { get; } = 0;
+            public Unit Unit { get; }
 
             /// <summary>
             /// <see cref="Fins.Net" /> in <see cref="SourceAddress" />
@@ -416,28 +541,12 @@ namespace Moravuscz.OmronPlcCommunication
             public Net Net { get; }
 
             #endregion Public Properties
-
-            #region Public Methods
-
-            /// <summary>
-            /// Treat <see cref="SourceAddress" /> as <see cref="int" /> when retrieving <see langword="value" />
-            /// </summary>
-            /// <param name="sourceAddress"><inheritdoc cref="SourceAddress(int)" /></param>
-            public static implicit operator int(SourceAddress sourceAddress) => sourceAddress.Net;
-
-            /// <summary>
-            /// Treat <see cref="SourceAddress" /> as <see cref="int" /> when assigning <see langword="value" />
-            /// </summary>
-            /// <param name="netNumber"><inheritdoc cref="SourceAddress(int)" /></param>
-            public static implicit operator SourceAddress(int netNumber) => new SourceAddress(netNumber);
-
-            #endregion Public Methods
         }
 
         /// <summary>
         /// FINS CPU Bus Unit Number
         /// </summary>
-        public struct Unit
+        public struct Unit : IConvertible
         {
             #region Public Fields
 
@@ -473,7 +582,7 @@ namespace Moravuscz.OmronPlcCommunication
             #region Public Properties
 
             /// <summary>
-            /// <inheritdoc cref="Unit(int)" path="/param[@name='unitNumber']"/>
+            /// <inheritdoc cref="Unit(int)" path="/param[@name='unitNumber']" />
             /// </summary>
             public int Value { get; }
 
@@ -491,7 +600,34 @@ namespace Moravuscz.OmronPlcCommunication
             /// Treat <see cref="Unit" /> as <see cref="int" /> when assigning <see langword="value" />
             /// </summary>
             /// <param name="unitNumber"><inheritdoc cref="Unit(int)" /></param>
-            public static implicit operator Unit(int unitNumber) => new Unit(unitNumber);
+            #if NET46_OR_GREATER
+            public static explicit operator Unit(int unitNumber) => new Unit(unitNumber);
+            #endif
+            #if NET5_0_OR_GREATER
+            public static explicit operator Unit(int unitNumber) => new(unitNumber);
+            #endif
+
+            #region IConvertible
+            #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+            public TypeCode GetTypeCode() => Convert.GetTypeCode(Value);
+            public bool ToBoolean(IFormatProvider provider) => Convert.ToBoolean(Value, provider);
+            public byte ToByte(IFormatProvider provider) => Convert.ToByte(Value, provider);
+            public char ToChar(IFormatProvider provider) => Convert.ToChar(Value, provider);
+            public DateTime ToDateTime(IFormatProvider provider) => Convert.ToDateTime(Value, provider);
+            public decimal ToDecimal(IFormatProvider provider) => Convert.ToDecimal(Value, provider);
+            public double ToDouble(IFormatProvider provider) => Convert.ToDouble(Value, provider);
+            public short ToInt16(IFormatProvider provider) => Convert.ToInt16(Value, provider);
+            public int ToInt32(IFormatProvider provider) => Convert.ToInt32(Value, provider);
+            public long ToInt64(IFormatProvider provider) => Convert.ToInt64(Value, provider);
+            public sbyte ToSByte(IFormatProvider provider) => Convert.ToSByte(Value, provider);
+            public float ToSingle(IFormatProvider provider) => Convert.ToSingle(Value, provider);
+            public string ToString(IFormatProvider provider) => Convert.ToString(Value, provider);
+            public object ToType(Type conversionType, IFormatProvider provider) => Convert.ChangeType(Value, conversionType);
+            public ushort ToUInt16(IFormatProvider provider) => Convert.ToUInt16(Value, provider);
+            public uint ToUInt32(IFormatProvider provider) => Convert.ToUInt32(Value, provider);
+            public ulong ToUInt64(IFormatProvider provider) => Convert.ToUInt64(Value, provider);
+            #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+            #endregion IConvertible
 
             #endregion Public Methods
         }

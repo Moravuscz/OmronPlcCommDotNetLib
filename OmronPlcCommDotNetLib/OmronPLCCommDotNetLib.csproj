@@ -11,7 +11,6 @@
 Supports communication over Ethernet (FINS/UDP, FINS/TCP, Ethernet/IP and RS232/422/485 (HostLink).
 Toolbus and USB protocols aren't publicly documented so implementing those isn't planned.</Description>
     
-    <FileVersion>0.1.8551.11451</FileVersion>
     <TargetFrameworks>net46;net5.0;net5.0-windows</TargetFrameworks>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageOutputPath>D:\develop\nuget_packages\</PackageOutputPath>
@@ -21,27 +20,48 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib.git</RepositoryUrl>
     <PackageTags>OMRON;PLC;FINS;EIP</PackageTags>
-    <Version>0.1.2</Version>
     <IncludeSymbols>true</IncludeSymbols>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <DocumentationFile>Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
+
+  <!-- GitInfo-->
+  <PropertyGroup Label="GitInfo Settings">
+    <GitVersion>false</GitVersion>
+    <GitThisAssembly>true</GitThisAssembly>
+    <ThisAssemblyNamespace>System.Reflection</ThisAssemblyNamespace>
+    <GitInfoReportImportance>high</GitInfoReportImportance>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(Configuration)' == 'Release'">false</IncludeSourceRevisionInInformationalVersion>
+    <IncludeSourceRevisionInInformationalVersion Condition="'$(Configuration)' == 'Debug'">true</IncludeSourceRevisionInInformationalVersion>
+    <SourceRevisionId Condition="'$(Configuration)' == 'Debug'">debug</SourceRevisionId>
+  </PropertyGroup>
+  
+  <Target Name="PopulateInfo" DependsOnTargets="GitVersion" BeforeTargets="GetAssemblyVersion;GenerateNuspec;GetPackageContents">
+    <PropertyGroup>
+      <Version>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)+$(GitCommit)</Version>
+      <AssemblyVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</AssemblyVersion>
+      <FileVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch)</FileVersion>
+      <InformationalVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitSemVerPatch).$(GitCommits)+$(GitCommit)</InformationalVersion>
+      <PackageVersion>$(GitSemVerMajor).$(GitSemVerMinor).$(GitCommits)</PackageVersion>
+      <RepositoryBranch>$(GitBranch)</RepositoryBranch>
+      <RepositoryCommit>$(GitCommit)</RepositoryCommit>
+    </PropertyGroup>
+  </Target>
+  <!-- GitInfo -->
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net46|AnyCPU'">
-    <DocumentationFile>C:\Users\moravek\source\repos\OmronPlcCommDotNetLib\OmronPlcCommDotNetLib\Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net46|AnyCPU'">
-    <DocumentationFile>C:\Users\moravek\source\repos\OmronPlcCommDotNetLib\OmronPlcCommDotNetLib\Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <Reference Include="System.Xaml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="GitInfo" Version="3.3.3" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.1.0" />
+    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.1.2" />
   </ItemGroup>
 </Project>
