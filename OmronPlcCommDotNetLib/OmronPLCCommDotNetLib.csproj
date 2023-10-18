@@ -16,6 +16,7 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
     <PackageOutputPath>D:\develop\nuget_packages\</PackageOutputPath>
     <PackageId>Moravuscz.OmronPlcCommunication</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <PackageProjectUrl>http://moravuscz.eu/projects/OmronPlcCommunication</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Moravuscz/OmronPlcCommDotNetLib.git</RepositoryUrl>
@@ -23,7 +24,6 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
     <IncludeSymbols>true</IncludeSymbols>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <DocumentationFile>Moravuscz.OmronPlcCommunication.xml</DocumentationFile>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -56,12 +56,14 @@ Toolbus and USB protocols aren't publicly documented so implementing those isn't
   <PropertyGroup Condition="'$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
     <Reference Include="System.Xaml" />
   </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="GitInfo" Version="3.3.3" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.1.2" />
+    <PackageReference Include="Moravuscz.OmronPlcInformation" Version="0.1.0" />
   </ItemGroup>
 </Project>
